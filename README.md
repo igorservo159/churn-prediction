@@ -1,11 +1,12 @@
 # Customer Churn Analysis
 
 This repository presents a logistic regression model built with PyTorch to predict e-commerce customer churn. The dataset used and some preprocessing steps were obtained from Dmytro Voytko's repository:  
+
 [https://github.com/dmytrovoytko/MLOps-churn-prediction](https://github.com/dmytrovoytko/MLOps-churn-prediction)
 
 ---
 
-## Exploratory Data Analysis
+# Exploratory Data Analysis
 
 The dataset contains **5,630 records** and **20 columns**, including numerical and categorical features. Below is a summary of all features present:
 
@@ -120,6 +121,32 @@ A full profiling report was generated using `ydata-profiling`, which includes st
 
 ---
 
-## Conclusion
+# Preprocessing
 
-This exploratory analysis highlights the key variables affecting customer churn in an e-commerce setting. Behavioral factors like **complaints**, **tenure**, **engagement frequency**, and **cashback incentives** show the strongest relationships. These insights are crucial for developing effective churn prediction models and customer retention strategies.
+To prepare the dataset for modeling, we implemented a dedicated preprocessing pipeline in [preprocess.py](./classes/preprocess.py). This script handles missing values, encodes categorical variables, and optionally removes outliers. The steps include:
+
+1. **Dropping Irrelevant Columns** 
+    - The column `CustomerID` was dropped as it does not provide predictive value for churn.
+
+2. **Handling Missing Values**
+    - Features with missing values were identified (e.g., `Tenure`, `DaySinceLastOrder`, `OrderAmountHikeFromlastYear`, etc.).
+    - All missing values were imputed using the **median** of each column to avoid introducing bias and to maintain robustness against outliers.
+
+3. **Outlier Removal (Optional)**
+    - The script includes an optional flag (`REMOVE_OUTLIERS`) to remove outliers.
+    - When enabled, outliers in the `Tenure` feature are removed using the **Interquartile Range (IQR)** method with configurable thresholds.
+
+4. **Encoding Categorical Variables**
+    - All categorical (non-numeric) columns are encoded using `OrdinalEncoder` from `sklearn`, preserving the ability to decode them later.
+    - If `fit_enc=True`, the encoder is fitted and the categories are stored. Otherwise, a pre-fitted encoder is used to transform unseen data.
+
+5. **Final Output**
+    - After preprocessing, the cleaned dataset is saved in `clean_data.pkl` and returned for model training or further analysis.
+
+## Example Usage
+
+``` bash
+python preprocess.py
+```
+
+This will read the raw dataset (`E Commerce Dataset.xlsx.csv`), apply all preprocessing steps, and save the output as a pickle file.

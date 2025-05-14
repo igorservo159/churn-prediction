@@ -32,7 +32,7 @@ The dataset contains **5,630 records** and **20 columns**, including numerical a
 
 Column types include `int64`, `float64`, and `object`. The `Churn` column indicates whether a customer has left the platform.
 
-For more details, refer to the full [Jupyter Notebook EDA](./exploratory-data-analysis.ipynb).
+For more details, refer to the full [Jupyter Notebook EDA](./exploratory_data_analysis.ipynb).
 
 Histograms for each numerical feature are available, such as the one shown below for `CashbackAmount`:  
 ![image](./imgs/cashback_amount_plot.png)

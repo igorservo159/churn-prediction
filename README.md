@@ -1,5 +1,7 @@
 # Customer Churn 
 
+> Author: João Igor Ramos de Lima
+
 This repository presents a logistic regression model built with PyTorch to predict e-commerce customer churn. The dataset used and some preprocessing steps were obtained from Dmytro Voytko's repository:  
 
 [https://github.com/dmytrovoytko/MLOps-churn-prediction](https://github.com/dmytrovoytko/MLOps-churn-prediction)
